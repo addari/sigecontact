@@ -1,0 +1,67 @@
+<div class="form">
+    <div class='well well-small'>
+        <?php echo Yii::t('app','Fields with') ?> <span class="required">*</span> <?php echo Yii::t('app','are required') ?>. </div>
+
+
+ <?php
+ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+ 'type' => 'horizontal',
+ 'id'=>'erp-ma-valores-tipo-form',
+ 'enableAjaxValidation'=>false,
+ 'enableClientValidation'=>true,
+ ));
+
+ echo $form->errorSummary($model);
+ ?>
+ 
+    <div class="control-group">
+        <?php echo $form->labelEx($model,'id_categoria',array('class'=>'control-label')) ; ?>
+        <div class="controls">
+          <?php     $this->widget('ext.select2.ESelect2', array(
+                'model' => $model,
+                'attribute' => 'idCategoria',
+                'data' => CHtml::encodeArray(CHtml::listData(ErpMaValoresTipoCateg::model()->findAll(), 'id', 'nombre')),
+                'htmlOptions' => array(
+                    'class' => 'span4',
+                    ),
+'options' => array(
+    'placeholder' => Yii::t('app', 'Select'),
+    'allowClear' => true,
+    'asDropDownList' => true,
+    ),
+)); ?>
+          <div class="help-inline"><?php echo $form->error($model,'id_categoria'); ?>
+</div>
+      </div>
+  </div>
+  
+    <div class="control-group">
+        <?php echo $form->labelEx($model,'nombre',array('class'=>'control-label')) ; ?>
+        <div class="controls">
+          <?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>64,'class'=>'span5')); ?>
+          <div class="help-inline"><?php echo $form->error($model,'nombre'); ?>
+</div>
+      </div>
+  </div>
+  
+    <div class="control-group">
+        <?php echo $form->labelEx($model,'validacion',array('class'=>'control-label')) ; ?>
+        <div class="controls">
+          <?php echo $form->textField($model,'validacion',array('size'=>60,'maxlength'=>256,'class'=>'span5')); ?>
+          <div class="help-inline"><?php echo $form->error($model,'validacion'); ?>
+</div>
+      </div>
+  </div>
+  
+<div class="form-actions">
+    <?php
+    echo CHtml::submitButton(Yii::t('app', 'Save'),array('class'=>'btn btn-success'));
+    echo '&nbsp;';
+    echo CHtml::Button(Yii::t('app', 'Cancel'), array(
+     'submit' => 'javascript:history.go(-1)',
+     'class'  => 'btn btn-inverse'
+     )
+);
+$this->endWidget(); ?>
+</div>
+</div> <!-- form -->
